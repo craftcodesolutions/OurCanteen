@@ -28,17 +28,17 @@ async function connectToMongoDB() {
 // Connect to MongoDB on startup
 connectToMongoDB();
 
-// Handle application shutdown
-process.on('SIGINT', async () => {
-    try {
-        await client.close();
-        console.log('MongoDB connection closed');
-        process.exit(0);
-    } catch (error) {
-        console.error('Error closing MongoDB connection:', error);
-        process.exit(1);
-    }
-});
+// // Handle application shutdown
+// process.on('SIGINT', async () => {
+//     try {
+//         await client.close();
+//         console.log('MongoDB connection closed');
+//         process.exit(0);
+//     } catch (error) {
+//         console.error('Error closing MongoDB connection:', error);
+//         process.exit(1);
+//     }
+// });
 
 // Utility function to handle async errors
 const handleAsync = (fn) => {
@@ -844,13 +844,13 @@ app.use((error, req, res, next) => {
 // });
 
 // Graceful shutdown
-process.on('SIGTERM', () => {
-    console.log('SIGTERM signal received: closing HTTP server');
-    app.close(() => {
-        console.log('HTTP server closed');
-        process.exit(0);
-    });
-});
+// process.on('SIGTERM', () => {
+//     console.log('SIGTERM signal received: closing HTTP server');
+//     app.close(() => {
+//         console.log('HTTP server closed');
+//         process.exit(0);
+//     });
+// });
 
 if (process.env.NODE_ENV !== 'production') {
     app.listen(PORT, () => {
