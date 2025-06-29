@@ -825,7 +825,7 @@ app.use((error, req, res, next) => {
 
     // Handle path-to-regexp errors specifically
     if (error.message && error.message.includes('Missing parameter name')) {
-        return res.status(400).json({ 
+        return res.status(400).json({
             error: 'Invalid route parameter format',
             details: 'Route parameter validation failed'
         });
@@ -852,9 +852,11 @@ process.on('SIGTERM', () => {
     });
 });
 
-// app.listen(PORT, () => {
-//     console.log(`Server running on port ${PORT}`);
-//     console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
-// });
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, () => {
+        console.log(`Server running on port ${PORT}`);
+        console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
+    });
+}
 
 module.exports = app;
